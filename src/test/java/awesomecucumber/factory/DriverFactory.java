@@ -107,12 +107,17 @@ public class DriverFactory {
                 switch (browser.toLowerCase()) {
                     case "chrome":
                         ChromeOptions chromeOptions = new ChromeOptions();
-                        chromeOptions.addArguments("--headless=new");
+                        chromeOptions.addArguments("--headless=new"); // headless mode
+                        chromeOptions.addArguments("--no-sandbox");
+                        chromeOptions.addArguments("--disable-dev-shm-usage");
+                        chromeOptions.addArguments("--disable-gpu"); // sometimes helps in Docker
+                        chromeOptions.addArguments("--window-size=1920,1080");
                         driver = new RemoteWebDriver(new URL(gridURL), new ChromeOptions());
                         break;
                     case "firefox":
                         FirefoxOptions firefoxOptions = new FirefoxOptions();
                         firefoxOptions.addArguments("--headless");
+                        firefoxOptions.addArguments("--window-size=1920,1080");
                         driver = new RemoteWebDriver(new URL(gridURL), new FirefoxOptions());
                         break;
                     default:
