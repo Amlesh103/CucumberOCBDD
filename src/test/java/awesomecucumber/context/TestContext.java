@@ -16,4 +16,15 @@ public class TestContext {
         cookies.setCookies(new io.restassured.http.Cookies()); // Initialize with empty cookies as we can't have null cookies as we are logging in without user and it can throw null pointer exception
     }
 
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(WebDriver driver) {
+        this.driver = driver;
+    }
+
+
+
+
 }

@@ -16,7 +16,7 @@ public class CartStepDefinitions {
 
     public CartStepDefinitions(TestContext context){
  //       driver = context.driver;
-        cartPage = PageObjectFactory.getCartPage(context.driver);
+        cartPage = PageObjectFactory.getCartPage(context.getDriver());
     }
 
     @Then("I should see {product} in the cart")

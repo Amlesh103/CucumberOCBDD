@@ -23,10 +23,10 @@ public class CheckoutStepDefinitions {
     private final ConfirmationPage confirmationPage;
 
     public CheckoutStepDefinitions(TestContext context){
-        driver = context.driver;
+        this.driver = context.getDriver();
         this.context = context;
-        checkoutPage = PageObjectFactory.getCheckoutPage(context.driver);
-        confirmationPage = PageObjectFactory.getConfirmationPage(context.driver);
+        checkoutPage = PageObjectFactory.getCheckoutPage(context.getDriver());
+        confirmationPage = PageObjectFactory.getConfirmationPage(context.getDriver());
 //        this.billingDetails = context.billingDetails;
     }
 

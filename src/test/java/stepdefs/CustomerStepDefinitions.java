@@ -14,7 +14,7 @@ private final WebDriver driver;
 private final StorePage storePage;
 TestContext context;
     public CustomerStepDefinitions(TestContext context){
-     driver = context.driver;
+     this.driver = context.getDriver();
      this.context = context;
    //  this.billingDetails = context.billingDetails;
         storePage = PageObjectFactory.getStorePage(context.driver);

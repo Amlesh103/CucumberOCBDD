@@ -37,7 +37,7 @@ public class MyStepDefinitions {
  //   CartPage cartPage;
 
     public MyStepDefinitions(TestContext context){
-        driver = context.driver;
+        this.driver = context.getDriver();
         System.out.println("Step Def: DI: Scenario Name -> " + context.scenarioName);
     }
 

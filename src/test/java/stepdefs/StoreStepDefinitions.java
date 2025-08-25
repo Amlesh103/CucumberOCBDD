@@ -15,9 +15,9 @@ public class StoreStepDefinitions {
     private TestContext context;
     private final StorePage storePage;
     public StoreStepDefinitions(TestContext context){
-        driver = context.driver;
+        this.driver = context.getDriver();
         this.context = context;
-        storePage = PageObjectFactory.getStorePage(context.driver);
+        storePage = PageObjectFactory.getStorePage(context.getDriver());
     }
 
     @Given("I am on the Store Page")

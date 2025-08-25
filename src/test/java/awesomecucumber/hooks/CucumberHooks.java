@@ -1,3 +1,5 @@
+/*
+
 package awesomecucumber.hooks;
 
 import awesomecucumber.context.TestContext;
@@ -29,5 +31,41 @@ public class CucumberHooks {
         System.out.println("After");
     //    DriverFactory.quitDriver();
         driver.quit();
+    }
+}
+
+*/
+
+package awesomecucumber.hooks;
+
+import awesomecucumber.context.TestContext;
+import awesomecucumber.factory.DriverFactory;
+import io.cucumber.java.Before;
+import io.cucumber.java.After;
+import org.openqa.selenium.WebDriver;
+
+public class CucumberHooks {
+
+    private final TestContext context;
+
+    public CucumberHooks(TestContext context) {
+        this.context = context;
+    }
+
+    @Before
+    public void setup() {
+        String browser = System.getProperty("browser", "chrome");
+        boolean isRemote = Boolean.parseBoolean(System.getProperty("remote", "true"));
+        String gridURL = System.getProperty("gridURL", "http://13.127.45.124:4444/wd/hub");
+
+        WebDriver driver = new DriverFactory().createDriver(browser, isRemote, gridURL);
+        context.setDriver(driver);
+    }
+
+    @After
+    public void teardown() {
+        if (context.getDriver() != null) {
+            context.getDriver().quit();
+        }
     }
 }
