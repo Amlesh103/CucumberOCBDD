@@ -106,9 +106,13 @@ public class DriverFactory {
             try {
                 switch (browser.toLowerCase()) {
                     case "chrome":
+                        ChromeOptions chromeOptions = new ChromeOptions();
+                        chromeOptions.addArguments("--headless=new");
                         driver = new RemoteWebDriver(new URL(gridURL), new ChromeOptions());
                         break;
                     case "firefox":
+                        FirefoxOptions firefoxOptions = new FirefoxOptions();
+                        firefoxOptions.addArguments("--headless");
                         driver = new RemoteWebDriver(new URL(gridURL), new FirefoxOptions());
                         break;
                     default:
