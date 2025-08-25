@@ -88,37 +88,50 @@ import java.net.URL;
 package awesomecucumber.factory;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
-  public class DriverFactory {
+public class DriverFactory {
 
-      public WebDriver createDriver(String browser, boolean isRemote, String gridURL) {
-          WebDriver driver;
+    public WebDriver createDriver(String browser, boolean isRemote, String gridURL) {
+        WebDriver driver;
 
-          if (isRemote) {
-              try {
-                  switch (browser.toLowerCase()) {
-                      case "chrome" -> driver = new RemoteWebDriver(new URL(gridURL), new ChromeOptions());
-                      case "firefox" -> driver = new RemoteWebDriver(new URL(gridURL), new FirefoxOptions());
-                      default -> throw new IllegalStateException("Unsupported Browser: " + browser);
-                  }
-              } catch (MalformedURLException e) {
-                  throw new RuntimeException("Invalid Grid URL: " + gridURL, e);
-              }
-          } else {
-              // Local execution
-              switch (browser.toLowerCase()) {
-                  case "chrome" -> driver = new org.openqa.selenium.chrome.ChromeDriver();
-                  case "firefox" -> driver = new org.openqa.selenium.firefox.FirefoxDriver();
-                  default -> throw new IllegalStateException("Unsupported Browser: " + browser);
-              }
-          }
+        if (isRemote) {
+            try {
+                switch (browser.toLowerCase()) {
+                    case "chrome":
+                        driver = new RemoteWebDriver(new URL(gridURL), new ChromeOptions());
+                        break;
+                    case "firefox":
+                        driver = new RemoteWebDriver(new URL(gridURL), new FirefoxOptions());
+                        break;
+                    default:
+                        throw new IllegalStateException("Unsupported Browser: " + browser);
+                }
+            } catch (MalformedURLException e) {
+                throw new RuntimeException("Invalid Grid URL: " + gridURL, e);
+            }
+        } else {
+            // Local execution
+            switch (browser.toLowerCase()) {
+                case "chrome":
+                    driver = new ChromeDriver();
+                    break;
+                case "firefox":
+                    driver = new FirefoxDriver();
+                    break;
+                default:
+                    throw new IllegalStateException("Unsupported Browser: " + browser);
+            }
+        }
 
-          driver.manage().window().maximize();
-          return driver;
-      }
-  }
+        driver.manage().window().maximize();
+        return driver;
+    }
+}
